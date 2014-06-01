@@ -1,4 +1,0 @@
-SpatialDataBase
-===============
-
-Oracle Spatial Databse
