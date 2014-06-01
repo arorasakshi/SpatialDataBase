@@ -1,0 +1,59 @@
+set define off;
+CREATE TABLE BUILDINGS
+(	BID VARCHAR2(10), 
+BNAME VARCHAR2(50), 
+BSHAPE SDO_GEOMETRY, 
+PRIMARY KEY (BID) ENABLE
+);
+
+
+INSERT INTO user_sdo_geom_metadata
+(TABLE_NAME,
+COLUMN_NAME,
+DIMINFO,
+SRID)
+VALUES (
+'buildings',
+'bshape',
+SDO_DIM_ARRAY( 
+SDO_DIM_ELEMENT('X', 1, 820, 1),
+SDO_DIM_ELEMENT('Y', 2, 580, 1)
+),
+NULL 
+);
+
+set define off;
+CREATE TABLE HYDRANTS
+(	HID VARCHAR2(10), 
+HSHAPE SDO_GEOMETRY, 
+PRIMARY KEY (HID) ENABLE
+);
+
+INSERT INTO user_sdo_geom_metadata
+(TABLE_NAME,
+COLUMN_NAME,
+DIMINFO,
+SRID)
+VALUES (
+'hydrants',
+'Hshape',
+SDO_DIM_ARRAY( 
+SDO_DIM_ELEMENT('X', 1, 820, 1),
+SDO_DIM_ELEMENT('Y', 2, 580, 1)
+),
+NULL 
+);
+
+
+CREATE TABLE fireBUILDINGS
+(	FBname VARCHAR2(10));
+
+
+CREATE INDEX building_spatial_idx
+ON buildings(bshape)
+INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+CREATE INDEX hydrant_spatial_idx
+ON hydrants(hshape)
+INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
